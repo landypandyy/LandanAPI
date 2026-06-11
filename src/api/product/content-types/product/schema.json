@@ -48,6 +48,10 @@
     },
     "aspectRatio": {
       "type": "string"
+    },
+    "bulky_item": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
