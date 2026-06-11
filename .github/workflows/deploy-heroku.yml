@@ -28,13 +28,16 @@ jobs:
 
       - name: Verify Heroku authentication
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku apps:info --app "$HEROKU_APP_NAME"
+          RAW_HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          export HEROKU_API_KEY="$(printf '%s' "$RAW_HEROKU_API_KEY" | tr -d '[:space:]')"
+          heroku apps:info --app "$HEROKU_APP_NAME"
 
       - name: Configure Heroku Git credentials
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          RAW_HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
+          HEROKU_API_KEY="$(printf '%s' "$RAW_HEROKU_API_KEY" | tr -d '[:space:]')"
           cat > ~/.netrc <<EOF
           machine git.heroku.com
             login _
@@ -43,8 +46,6 @@ jobs:
           chmod 600 ~/.netrc
 
       - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           git remote add heroku "https://git.heroku.com/${HEROKU_APP_NAME}.git"
           git push heroku HEAD:master
