@@ -1,0 +1,49 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-heroku
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Verify Heroku authentication
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        run: heroku apps:info --app "$HEROKU_APP_NAME"
+
+      - name: Configure Heroku Git credentials
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          cat > ~/.netrc <<EOF
+          machine git.heroku.com
+            login _
+            password ${HEROKU_API_KEY}
+          EOF
+          chmod 600 ~/.netrc
+
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        run: |
+          git remote add heroku "https://git.heroku.com/${HEROKU_APP_NAME}.git"
+          git push heroku HEAD:master
