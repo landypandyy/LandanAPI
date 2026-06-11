@@ -10,6 +10,9 @@ concurrency:
   group: deploy-heroku
   cancel-in-progress: false
 
+env:
+  HEROKU_APP_NAME: shielded-sea-51712
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +29,6 @@ jobs:
       - name: Verify Heroku authentication
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: heroku apps:info --app "$HEROKU_APP_NAME"
 
       - name: Configure Heroku Git credentials
@@ -43,7 +45,6 @@ jobs:
       - name: Deploy to Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
           git remote add heroku "https://git.heroku.com/${HEROKU_APP_NAME}.git"
           git push heroku HEAD:master
