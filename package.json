@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
+  "packageManager": "npm@10.8.2",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -11,13 +12,15 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-graphql": "4.0.7",
-    "@strapi/plugin-i18n": "4.0.7",
-    "@strapi/plugin-users-permissions": "4.0.7",
-    "@strapi/provider-upload-cloudinary": "^4.1.0",
-    "@strapi/strapi": "4.0.7",
+    "@strapi/plugin-users-permissions": "5.48.0",
+    "@strapi/provider-upload-cloudinary": "5.48.0",
+    "@strapi/strapi": "5.48.0",
     "pg": "^8.7.1",
-    "pg-connection-string": "^2.5.0"
+    "pg-connection-string": "^2.5.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
   "author": {
     "name": "A Strapi developer"
@@ -26,8 +29,8 @@
     "uuid": "73cf2a5c-a3c4-47bc-9b1d-0a1c9d3cf835"
   },
   "engines": {
-    "node": "16.16.0",
-    "npm": "8.11.0"
+    "node": "22.x",
+    "npm": "10.x"
   },
   "license": "MIT"
 }

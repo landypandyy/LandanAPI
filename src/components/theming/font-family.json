@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_theming_font_families",
+  "info": {
+    "displayName": "Font Family",
+    "icon": "font"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

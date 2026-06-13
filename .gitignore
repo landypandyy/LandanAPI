@@ -67,6 +67,8 @@ $RECYCLE.BIN/
 
 .tmp
 *.log
+logfile
+*.dump
 *.sql
 *.sqlite
 *.sqlite3
@@ -112,5 +114,6 @@ license.txt
 exports
 *.cache
 build
+.strapi/
+types/
 .strapi-updater.json
-package-lock.json

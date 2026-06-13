@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_theming_themes",
+  "info": {
+    "displayName": "Theme",
+    "icon": "paint-brush"
+  },
+  "options": {},
+  "attributes": {
+    "fontFamilies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "theming.font-family"
+    }
+  }
+}
