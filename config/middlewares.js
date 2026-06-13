@@ -1,7 +1,20 @@
-module.exports = [
+module.exports = ({ env }) => [
   "strapi::errors",
   "strapi::security",
-  "strapi::cors",
+  {
+    name: "strapi::cors",
+    config: {
+      origin: env.array("CORS_ORIGIN", [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://landypandyy.com",
+        "https://www.landypandyy.com",
+        "https://landan-portfolio.vercel.app",
+      ]),
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
+      headers: "*",
+    },
+  },
   "strapi::poweredBy",
   "strapi::logger",
   "strapi::query",
